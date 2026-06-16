@@ -1,0 +1,1107 @@
+{
+  "generativelanguage.googleapis.com": [
+    {
+      "method": "POST",
+      "path": ":generateContent",
+      "path_match": "suffix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "hermes",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": true
+    },
+    {
+      "method": "POST",
+      "path": ":streamGenerateContent",
+      "path_match": "contains",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "hermes",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": true
+    }
+  ],
+  "mockgpt.dev.internal": [
+    {
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "mockgpt_web",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "parser": {
+        "kind": "openai_chat",
+        "request": {
+          "user_content_path": "messages[?role=='user'].content"
+        },
+        "response": {
+          "type": "sse",
+          "delta_path": "choices[0].delta.content",
+          "non_stream_path": "choices[0].message.content"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/v1/files",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "mockgpt_web",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "GET",
+      "path": "/ws/chat",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "mockgpt_web",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "parser": {
+        "kind": "openai_chat",
+        "ws_request": {
+          "user_content_path": "content"
+        },
+        "ws_response": {
+          "audit_when_path": "done",
+          "audit_path": "triggers"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/ws/chat",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "mockgpt_web",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "parser": {
+        "kind": "openai_chat",
+        "ws_request": {
+          "user_content_path": "content"
+        },
+        "ws_response": {
+          "audit_when_path": "done",
+          "audit_path": "triggers"
+        }
+      }
+    }
+  ],
+  "pocrev.netrasecurity.ai": [
+    {
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "ai_app_external",
+      "channel_code": "ch_web_3105142067",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "parser": {
+        "kind": "openai_chat",
+        "response": {
+          "type": "json",
+          "non_stream_path": "choices[0].message.content",
+          "message_id_path": "message_id",
+          "conversation_id_path": "conversation_id"
+        },
+        "request": {
+          "user_content_path": "messages[?role=='user'].content",
+          "conversation_id_path": "conversation_id",
+          "message_id_path": "messages[?role=='user'].id",
+          "parent_message_id_path": "parent_message_id"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/v1/chat/block_test",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "ai_app_external",
+      "channel_code": "ch_web_3105142067",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "parser": {
+        "kind": "openai_chat",
+        "request": {
+          "user_content_path": "messages[?role=='user'].content",
+          "conversation_id_path": "conversation_id",
+          "message_id_path": "messages[?role=='user'].id",
+          "parent_message_id_path": "parent_message_id"
+        },
+        "response": {
+          "type": "json",
+          "non_stream_path": "choices[0].message.content",
+          "message_id_path": "message_id",
+          "conversation_id_path": "conversation_id"
+        }
+      }
+    }
+  ],
+  "taffytest.dev.internal": [
+    {
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "ch_web_1957363793",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "parser": {
+        "kind": "openai_chat",
+        "response": {
+          "type": "sse"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/ws/chat",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "ch_web_1957363793",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "parser": {
+        "kind": "openai_chat",
+        "ws_request": {
+          "user_content_path": "content"
+        },
+        "ws_response": {
+          "audit_path": "triggers",
+          "audit_when_path": "done"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/ws/chat",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "ch_web_1957363793",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "parser": {
+        "kind": "openai_chat",
+        "ws_request": {
+          "user_content_path": "content"
+        },
+        "ws_response": {
+          "audit_path": "triggers",
+          "audit_when_path": "done"
+        }
+      }
+    }
+  ],
+  "copilot.microsoft.com": [
+    {
+      "method": "GET",
+      "path": "/c/api/chat",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "copilot",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": false,
+      "description": "Bing Copilot WebSocket upgrade handshake"
+    },
+    {
+      "method": "POST",
+      "path": "/c/api/chat",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "copilot",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "Bing Copilot WebSocket frame relay (taffy -> dlp_server, per-frame)"
+    },
+    {
+      "method": "POST",
+      "path": "/c/api/attachments",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "copilot",
+      "is_copy_response": true,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "Bing Copilot file/image upload (multipart, response carries attachment id)"
+    }
+  ],
+  "substrate.office.com": [
+    {
+      "method": "POST",
+      "path": "/m365Copilot/Chathub",
+      "path_match": "prefix",
+      "params": [],
+      "origin": "https://m365.cloud.microsoft,https://www.microsoft365.com,https://teams.microsoft.com,https://teams.cloud.microsoft,https://outlook.office.com,*.resources.office.net",
+      "origin_code": {
+        "https://m365.cloud.microsoft": "copilot_m365",
+        "https://www.microsoft365.com": "copilot_m365",
+        "https://teams.microsoft.com": "copilot_teams",
+        "https://teams.cloud.microsoft": "copilot_teams",
+        "https://outlook.office.com": "copilot_teams",
+        "*.resources.office.net": "copilot_m365"
+      },
+      "channel_type": "aiembedded",
+      "channel_code": "copilot_m365,copilot_teams",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "GET",
+      "path": "/m365Copilot/Chathub",
+      "path_match": "prefix",
+      "params": [],
+      "origin": "https://m365.cloud.microsoft,https://www.microsoft365.com,https://teams.microsoft.com,https://teams.cloud.microsoft,https://outlook.office.com,*.resources.office.net",
+      "origin_code": {
+        "https://m365.cloud.microsoft": "copilot_m365",
+        "https://www.microsoft365.com": "copilot_m365",
+        "https://teams.microsoft.com": "copilot_teams",
+        "https://teams.cloud.microsoft": "copilot_teams",
+        "https://outlook.office.com": "copilot_teams",
+        "*.resources.office.net": "copilot_m365"
+      },
+      "channel_type": "aiembedded",
+      "channel_code": "copilot_m365,copilot_teams",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "POST",
+      "path": "/m365Copilot/UploadFile",
+      "path_match": "prefix",
+      "params": [],
+      "origin": "https://m365.cloud.microsoft,https://www.microsoft365.com,https://teams.microsoft.com,https://teams.cloud.microsoft,https://outlook.office.com,*.resources.office.net",
+      "origin_code": {
+        "https://m365.cloud.microsoft": "copilot_m365",
+        "https://www.microsoft365.com": "copilot_m365",
+        "https://teams.microsoft.com": "copilot_teams",
+        "https://teams.cloud.microsoft": "copilot_teams",
+        "https://outlook.office.com": "copilot_teams",
+        "*.resources.office.net": "copilot_m365"
+      },
+      "channel_type": "aiembedded",
+      "channel_code": "copilot_m365,copilot_teams",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "GET",
+      "path": "/CompliancePolicy/ClientSyncFile/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "copilot_m365",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": false,
+      "is_upload": false
+    }
+  ],
+  "augloop.svc.cloud.microsoft": [
+    {
+      "method": "GET",
+      "path": "/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "copilot_m365",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "POST",
+      "path": "/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "copilot_m365",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true
+    }
+  ],
+  "*.augloop.svc.cloud.microsoft": [
+    {
+      "method": "GET",
+      "path": "/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "copilot_m365",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "POST",
+      "path": "/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "copilot_m365",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true
+    }
+  ],
+  "graph.microsoft.com": [
+    {
+      "method": "POST",
+      "path": "/createUploadSession",
+      "path_match": "suffix",
+      "params": [],
+      "origin": "https://m365.cloud.microsoft,https://www.microsoft365.com,https://teams.microsoft.com,https://teams.cloud.microsoft,https://outlook.office.com,*.resources.office.net",
+      "origin_code": {
+        "https://m365.cloud.microsoft": "copilot_m365",
+        "https://www.microsoft365.com": "copilot_m365",
+        "https://teams.microsoft.com": "copilot_teams",
+        "https://teams.cloud.microsoft": "copilot_teams",
+        "https://outlook.office.com": "copilot_teams",
+        "*.resources.office.net": "copilot_m365"
+      },
+      "channel_type": "aiembedded",
+      "channel_code": "copilot_m365,copilot_teams",
+      "is_copy_response": true,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    }
+  ],
+  "*.sharepoint.com": [
+    {
+      "method": "PUT",
+      "path": "/uploadSession",
+      "path_match": "suffix",
+      "params": [],
+      "origin": "https://m365.cloud.microsoft,https://www.microsoft365.com,https://teams.microsoft.com,https://teams.cloud.microsoft,https://outlook.office.com,*.resources.office.net",
+      "origin_code": {
+        "https://m365.cloud.microsoft": "copilot_m365",
+        "https://www.microsoft365.com": "copilot_m365",
+        "https://teams.microsoft.com": "copilot_teams",
+        "https://teams.cloud.microsoft": "copilot_teams",
+        "https://outlook.office.com": "copilot_teams",
+        "*.resources.office.net": "copilot_m365"
+      },
+      "channel_type": "aiembedded",
+      "channel_code": "copilot_m365,copilot_teams",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "PUT",
+      "path": ":/content",
+      "path_match": "suffix",
+      "params": [],
+      "origin": "https://teams.cloud.microsoft,https://teams.microsoft.com,https://outlook.office.com",
+      "origin_code": {
+        "https://teams.cloud.microsoft": "chat_teams",
+        "https://teams.microsoft.com": "chat_teams",
+        "https://outlook.office.com": "chat_teams"
+      },
+      "channel_type": "aiembedded",
+      "channel_code": "chat_teams",
+      "is_copy_response": true,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    }
+  ],
+  "teams.cloud.microsoft": [
+    {
+      "method": "POST",
+      "path": "/api/chatsvc/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "chat_teams",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    }
+  ],
+  "*.trouter.teams.microsoft.com": [
+    {
+      "method": "GET",
+      "path": "/v4/c",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "chat_teams",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "POST",
+      "path": "/v4/c",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "chat_teams",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "GET",
+      "path": "/v3/c",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "chat_teams",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "POST",
+      "path": "/v3/c",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "chat_teams",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true
+    }
+  ],
+  "teams.microsoft.com": [
+    {
+      "method": "POST",
+      "path": "/api/chatsvc/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "chat_teams",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    }
+  ],
+  "www.google.com": [
+    {
+      "method": "GET",
+      "path": "/async/folif",
+      "path_match": "prefix",
+      "params": [
+        {
+          "key": "udm",
+          "value": "50",
+          "match": "equal"
+        }
+      ],
+      "channel_type": "webllm",
+      "channel_code": "google_ai_mode_web",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": false,
+      "description": "Google AI Mode prompt + AI response HTML"
+    }
+  ],
+  "lensfrontend-pa.clients6.google.com": [
+    {
+      "method": "POST",
+      "path": "/v1/crupload",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "google_ai_mode_web",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "Google AI Mode (Lens) image / document upload; response carries vsrid"
+    }
+  ],
+  "api.anthropic.com": [
+    {
+      "method": "GET",
+      "path": "/api/oauth/profile",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "aicoding",
+      "channel_code": "claude_code",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": false,
+      "description": "Claude OAuth profile � cache account/organization mapping (shared by claude_code + claude_dispatch)"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/messages",
+      "path_match": "suffix",
+      "params": [],
+      "user_agents": "local-agent,cli)",
+      "user_agents_code": {
+        "local-agent": "claude_dispatch",
+        "cli)": "claude_code"
+      },
+      "channel_type": "aicoding",
+      "channel_code": "claude_code,claude_dispatch",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "Claude /v1/messages � UA split: dispatch (UA contains 'local-agent') vs CLI (UA ends with 'cli)'). Asymmetry on purpose: 'local-agent' is already a distinctive phrase so no anchor needed; 'cli' is too generic so ')' anchors it to parenthetical close. NOTE: user_agents substrings must NOT contain commas � taffy MultiString.UnmarshalJSON does naive comma split."
+    },
+    {
+      "method": "POST",
+      "path": "/v1/environments/bridge",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "aicoding",
+      "channel_code": "claude_dispatch",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": false,
+      "description": "Cowork bridge env create � response contains environment_secret (sk-ant-oat01-... OAuth token)"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/environments/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aicoding",
+      "channel_code": "claude_dispatch",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": false,
+      "description": "Cowork bridge worker long-poll (work/poll task delivery)"
+    }
+  ],
+  "claude.ai": [
+    {
+      "method": "POST",
+      "path": "/completion",
+      "path_match": "suffix",
+      "params": [],
+      "user_agents": "Electron/",
+      "channel_type": "webllm",
+      "channel_code": "claude_app",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": true,
+      "description": "Claude.ai DESKTOP APP chat completion � UA contains Electron/ (Electron desktop app); parsed by webllm_claude.go (handleCompletion). MUST precede the claude_web catch-all."
+    },
+    {
+      "method": "POST",
+      "path": "/completion",
+      "path_match": "suffix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "claude_web",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": true,
+      "description": "Claude.ai WEB (browser) chat completion � catch-all, no user_agents; parsed by webllm_claude.go (handleCompletion)"
+    },
+    {
+      "method": "POST",
+      "path": "/wiggle/upload-file",
+      "path_match": "suffix",
+      "params": [],
+      "user_agents": "Electron/",
+      "channel_type": "webllm",
+      "channel_code": "claude_app",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": true,
+      "description": "Claude.ai DESKTOP APP image/file upload � UA contains Electron/; parsed by webllm_claude.go (handleUploadFile). MUST precede the claude_web catch-all."
+    },
+    {
+      "method": "POST",
+      "path": "/wiggle/upload-file",
+      "path_match": "suffix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "claude_web",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": true,
+      "description": "Claude.ai WEB (browser) image/file upload � catch-all, no user_agents; parsed by webllm_claude.go (handleUploadFile)"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/sessions/",
+      "path_match": "prefix",
+      "params": [],
+      "referers": "https://claude.ai/cowork/agent",
+      "referers_code": {
+        "https://claude.ai/cowork/agent": "claude_dispatch"
+      },
+      "channel_type": "aicoding",
+      "channel_code": "claude_dispatch",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": false,
+      "description": "Cowork sidebar UI: session events (assistant reply + tool_use) � referer-split to avoid generic claude.ai traffic"
+    },
+    {
+      "method": "POST",
+      "path": "OmeletteService/Chat",
+      "path_match": "suffix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "claude_design",
+      "is_copy_response": true,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": true
+    },
+    {
+      "method": "POST",
+      "path": "OmeletteService/WriteFiles",
+      "path_match": "suffix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "claude_design",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": false,
+      "is_upload": true
+    }
+  ],
+  "discoveryengine.clients6.google.com": [
+    {
+      "method": "POST",
+      "path": "/v1alpha/locations/global/widgetStreamAssist",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "gemini_enterprise_web",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "Gemini Enterprise - widgetStreamAssist (user prompt + AI streaming response)"
+    },
+    {
+      "method": "POST",
+      "path": "/engines/",
+      "path_match": "contains",
+      "params": [
+        {
+          "key": "upload_id",
+          "value": "",
+          "match": "exist"
+        }
+      ],
+      "channel_type": "webllm",
+      "channel_code": "gemini_enterprise_web",
+      "is_copy_response": true,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "Gemini Enterprise - sessions/{sess}:uploadFile (path contains /engines/ distinguishes from NotebookLM Enterprise /notebooks/)"
+    },
+    {
+      "method": "POST",
+      "path": "/notebooks/",
+      "path_match": "contains",
+      "params": [
+        {
+          "key": "upload_id",
+          "value": "",
+          "match": "exist"
+        }
+      ],
+      "channel_type": "webllm",
+      "channel_code": "notebooklm_enterprise_web",
+      "is_copy_response": true,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "NotebookLM Enterprise - notebooks/{nb}/sources:uploadFile (path contains /notebooks/ distinguishes from Gemini Enterprise /engines/)"
+    }
+  ],
+  "vertexaisearch.cloud.google.com": [
+    {
+      "method": "GET",
+      "path": "/home/cid/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "gemini_enterprise_web",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": false,
+      "is_upload": false,
+      "description": "Gemini Enterprise - SPA entry (extract cid from URL path)"
+    },
+    {
+      "method": "POST",
+      "path": "/notebooklm/global/_/CloudNotebookLmUi/data/google.cloud.notebooklm.v1main.NotebookService/GenerateFreeFormStreamed",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "notebooklm_enterprise_web",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "NotebookLM Enterprise - GenerateFreeFormStreamed chat (user prompt + AI streaming response)"
+    },
+    {
+      "method": "POST",
+      "path": "/notebooklm/global/_/CloudNotebookLmUi/data/batchexecute",
+      "path_match": "prefix",
+      "params": [
+        {
+          "key": "rpcids",
+          "value": "LmGGPd",
+          "match": "equal"
+        }
+      ],
+      "channel_type": "webllm",
+      "channel_code": "notebooklm_enterprise_web",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": false,
+      "description": "NotebookLM Enterprise - LmGGPd batchexecute (AI brief / overview generation; audit only, no block)"
+    }
+  ],
+  "skills-mfe.cocounsel-uk.thomsonreuters.com": [
+    {
+      "method": "POST",
+      "path": "/api/ai-assistant/proxy/new_chat/chat/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "cocounsel_m365",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "CoCounsel M365 chat � user-message body + SSE response. chat_id captured from URL path."
+    }
+  ],
+  "cocounsel-api-uk.casetext.com": [
+    {
+      "method": "PUT",
+      "path": "/files/upload",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "cocounsel_m365",
+      "is_copy_response": true,
+      "is_audit_response": false,
+      "is_need_block": false,
+      "is_upload": false,
+      "description": "CoCounsel M365 upload metadata exchange � caches doc_id ? file_name; no audit log emitted (file bytes are audited at the S3 host)."
+    }
+  ],
+  "a205923-akk-co-prd-srs-euw2-563418337794.s3-accelerate.amazonaws.com": [
+    {
+      "method": "PUT",
+      "path": "/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "cocounsel_m365",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "CoCounsel M365 S3 raw file bytes upload (UK bucket � dedicated to CoCounsel so host filter alone suffices)."
+    }
+  ],
+  "mock-dlp.54-254-228-175.sslip.io": [
+    {
+      "method": "POST",
+      "path": "/v1alpha/locations/global/widgetStreamAssist",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "gemini_enterprise_web_mock",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "MOCK Gemini Enterprise - widgetStreamAssist (points to mock-dlp-service on EC2)"
+    },
+    {
+      "method": "POST",
+      "path": "/engines/",
+      "path_match": "contains",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "gemini_enterprise_web_mock",
+      "is_copy_response": true,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "MOCK Gemini Enterprise upload � path contains /engines/ distinguishes from NotebookLM Enterprise /notebooks/"
+    },
+    {
+      "method": "POST",
+      "path": "/notebooks/",
+      "path_match": "contains",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "notebooklm_enterprise_web_mock",
+      "is_copy_response": true,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "MOCK NotebookLM Enterprise upload � path contains /notebooks/ distinguishes from Gemini Enterprise /engines/"
+    },
+    {
+      "method": "GET",
+      "path": "/home/cid/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "gemini_enterprise_web_mock",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": false,
+      "is_upload": false,
+      "description": "MOCK Gemini Enterprise SPA entry � cache cid"
+    },
+    {
+      "method": "POST",
+      "path": "/notebooklm/global/_/CloudNotebookLmUi/data/google.cloud.notebooklm.v1main.NotebookService/GenerateFreeFormStreamed",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "webllm",
+      "channel_code": "notebooklm_enterprise_web_mock",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "MOCK NotebookLM Enterprise - GenerateFreeFormStreamed chat"
+    },
+    {
+      "method": "POST",
+      "path": "/notebooklm/global/_/CloudNotebookLmUi/data/batchexecute",
+      "path_match": "prefix",
+      "params": [
+        {
+          "key": "rpcids",
+          "value": "LmGGPd",
+          "match": "equal"
+        }
+      ],
+      "channel_type": "webllm",
+      "channel_code": "notebooklm_enterprise_web_mock",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": false,
+      "is_upload": false,
+      "description": "MOCK NotebookLM Enterprise - LmGGPd brief (audit only, no block)"
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai-assistant/proxy/new_chat/chat/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "cocounsel_m365_mock",
+      "is_copy_response": false,
+      "is_audit_response": true,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "MOCK CoCounsel M365 chat � points to mock-dlp-service"
+    },
+    {
+      "method": "PUT",
+      "path": "/files/upload",
+      "path_match": "equal",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "cocounsel_m365_mock",
+      "is_copy_response": true,
+      "is_audit_response": false,
+      "is_need_block": false,
+      "is_upload": false,
+      "description": "MOCK CoCounsel M365 upload metadata (signed-URL exchange)"
+    },
+    {
+      "method": "PUT",
+      "path": "/1006110698/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "aiembedded",
+      "channel_code": "cocounsel_m365_mock",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true,
+      "description": "MOCK CoCounsel M365 S3 raw bytes � /<acct_id>/<uuid> path; acct_id 1006110698 is hardcoded in cocounsel mock response template"
+    }
+  ],
+  "internal-api-lark-file-sg.larksuite.com": [
+    {
+      "method": "PUT",
+      "path": "/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "netim",
+      "channel_code": "net_lark",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "POST",
+      "path": "/",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "netim",
+      "channel_code": "net_lark",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    }
+  ],
+  "github.com": [
+    {
+      "method": "POST",
+      "path": "/create",
+      "path_match": "contains",
+      "params": [],
+      "channel_type": "code",
+      "channel_code": "github",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "POST",
+      "path": "/tree-save",
+      "path_match": "contains",
+      "params": [],
+      "channel_type": "code",
+      "channel_code": "github",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    },
+    {
+      "method": "GET",
+      "path": "/_side-panels/user.json",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "code",
+      "channel_code": "github",
+      "is_copy_response": true,
+      "is_audit_response": false,
+      "is_need_block": false,
+      "is_upload": false
+    },
+    {
+      "method": "POST",
+      "path": "/upload/policies/upload-manifest-files",
+      "path_match": "prefix",
+      "params": [],
+      "channel_type": "code",
+      "channel_code": "github",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": false,
+      "is_upload": false
+    }
+  ],
+  "objects-origin.githubusercontent.com": [
+    {
+      "method": "POST",
+      "path": "/github-production-upload-manifest-file",
+      "path_match": "contains",
+      "params": [],
+      "channel_type": "code",
+      "channel_code": "github",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    }
+  ],
+  "*.s3.amazonaws.com": [
+    {
+      "method": "POST",
+      "path": "",
+      "path_match": "",
+      "params": [],
+      "channel_type": "code",
+      "channel_code": "github",
+      "is_copy_response": false,
+      "is_audit_response": false,
+      "is_need_block": true,
+      "is_upload": true
+    }
+  ]
+}
