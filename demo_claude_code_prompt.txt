@@ -1,0 +1,10 @@
+Demo claude code - prompt
+
+Demo project :https://github.com/anthropics/claude-code
+
+Demo step :
+1. open power shell
+2. cmd : claude
+3. input prompt : Briefly describe this project's features
+4. claude ouput result
+5. web UI audit input prompt and access file
